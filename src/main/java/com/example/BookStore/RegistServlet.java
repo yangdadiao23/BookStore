@@ -21,15 +21,16 @@ public class RegistServlet extends HttpServlet {
         if("qwe".equals(code)){
             if(us.checkByusername(username)){
                 System.out.println("用户名已存在！");
-                request.getRequestDispatcher("/pages/user/regist.html").forward(request,response);
+                request.getRequestDispatcher("/pages/user/regist.jsp").forward(request,response);
             }else{
                 System.out.println("注册成功！");
                 us.regist(new User(username,password,email));
-                request.getRequestDispatcher("/pages/user/regist_success.html").forward(request,response);
+                request.getRequestDispatcher("/pages/user/regist_success.jsp" +
+                        "").forward(request,response);
             }
         }else{
             System.out.println("验证码错误!");
-            request.getRequestDispatcher("/pages/user/regist.html").forward(request,response);
+            request.getRequestDispatcher("/pages/user/regist.jsp").forward(request,response);
         }
 
     }

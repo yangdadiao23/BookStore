@@ -1,10 +1,10 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>尚硅谷会员注册页面</title>
-	<base href="http://localhost:8080/BookStore/">
-<link type="text/css" rel="stylesheet" href="static/css/style.css" >
+	<%@include file="/pages/common/head.jsp"%>
 <style type="text/css">
 	.login_form{
 		height:420px;
@@ -110,10 +110,6 @@
 					</div>
 				</div>
 			</div>
-		<div id="bottom">
-			<span>
-				尚硅谷书城.Copyright &copy;2015
-			</span>
-		</div>
+     <%@include file="/pages/common/tail.jsp"%>
 </body>
 </html>
