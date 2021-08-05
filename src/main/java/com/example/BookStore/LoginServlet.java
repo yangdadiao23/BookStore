@@ -19,7 +19,13 @@ public class LoginServlet extends HttpServlet {
         if(us.login(new User(username,password))!=null){
             request.getRequestDispatcher("/pages/user/login_success.jsp").forward(request,response);
         }else{
+            request.setAttribute("msg","用户名或密码错误！");
+            System.out.println(request.getParameter("msg"));
+            request.setAttribute("username",username);
+            System.out.println(request.getParameter("username"));
             request.getRequestDispatcher("/pages/user/login.jsp").forward(request,response);
         }
+
+
     }
 }

@@ -20,7 +20,11 @@ public class RegistServlet extends HttpServlet {
         String code = request.getParameter("code");
         if("qwe".equals(code)){
             if(us.checkByusername(username)){
-                System.out.println("用户名已存在！");
+                request.setAttribute("msg","用户名已存在!");
+                request.setAttribute("username",username);
+                request.setAttribute("email",email);
+                System.out.println(request.getAttribute("msg"));
+                System.out.println("用户名已存在!");
                 request.getRequestDispatcher("/pages/user/regist.jsp").forward(request,response);
             }else{
                 System.out.println("注册成功！");
@@ -29,7 +33,11 @@ public class RegistServlet extends HttpServlet {
                         "").forward(request,response);
             }
         }else{
-            System.out.println("验证码错误!");
+            request.setAttribute("msg","验证码错误!");
+            request.setAttribute("username",username);
+            request.setAttribute("email",email);
+            System.out.println("验证码错误！");
+            System.out.println(request.getAttribute("msg"));
             request.getRequestDispatcher("/pages/user/regist.jsp").forward(request,response);
         }
 
