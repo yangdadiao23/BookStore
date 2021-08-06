@@ -1,6 +1,5 @@
 package Variety.dao.impl;
 
-import Variety.dao.BaseDao;
 import Variety.dao.UserDao;
 import Variety.pojo.User;
 

@@ -1,4 +1,4 @@
-package Variety.dao;
+package Variety.dao.impl;
 
 import Variety.utils.jdbcUtils;
 import org.apache.commons.dbutils.QueryRunner;
