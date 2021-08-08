@@ -7,8 +7,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 public class BookDaoImplTest {
     private BookDaoImpl bookDao=new BookDaoImpl();
     @After
@@ -36,8 +34,15 @@ public class BookDaoImplTest {
     }
 
     @Test
-    public void queryBooks() {
-        List<Book> books = bookDao.queryBooks();
-        books.stream().forEach(System.out::println);
+    public void Test() {
+        System.out.println( bookDao.QueryPageTotalCount(40,50));
+        bookDao.queryItems(2,4,1,10).stream().forEach(System.out::println);
     }
+
+
+
+
+
+
+
 }

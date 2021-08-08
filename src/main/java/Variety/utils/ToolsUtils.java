@@ -12,4 +12,15 @@ public class ToolsUtils {
         }
         return target;
     }
+
+    public static int StringToint(String s,int defaultValue){
+        int target;
+        try {
+           target=Integer.parseInt(s);
+           return target;
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return defaultValue;
+    }
 }

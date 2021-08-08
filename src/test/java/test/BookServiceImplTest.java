@@ -1,8 +1,12 @@
 package test;
 
+import Variety.pojo.Page;
 import Variety.service.impl.BookServiceImpl;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.junit.Test;
+
+import javax.crypto.spec.OAEPParameterSpec;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -27,7 +31,13 @@ public class BookServiceImplTest {
     }
 
     @Test
-    public void queryBooks() {
-        bookService.queryBooks().stream().forEach(System.out::println);
+    public void Test() {
+
+        Page page = bookService.pageByPrice(3, 4, 1, 10);
+        List items = page.getItems();
+        System.out.println(page);
+        items.stream().forEach(System.out::println);
+
+
     }
 }

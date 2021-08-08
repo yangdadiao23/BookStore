@@ -1,5 +1,6 @@
 package Variety.dao.impl;
 
+import Variety.pojo.Book;
 import Variety.utils.jdbcUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;

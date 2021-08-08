@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>尚硅谷会员注册页面</title>
 	<%@include file="/pages/common/head.jsp"%>
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <style type="text/css">
 	.login_form{
 		height:420px;
