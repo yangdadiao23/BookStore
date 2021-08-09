@@ -57,6 +57,12 @@
 
 			$("span.errorMsg").text("");
 
+			$("#suerCode").click(function (){
+				this.src=this.src;
+/*				this.src=this.src+"?date="+ new Date();
+*               用于跳过浏览器缓存来更换验证码图片！                                          */
+			})
+
 		})
 
 	</script>
@@ -110,7 +116,7 @@
 									<br />
 									<label>验证码：</label>
 									<input class="itxt" type="text" style="width: 150px;" name="code" id="code"/>
-									<img alt="" src="static/img/code.bmp" style="float: right; margin-right: 40px">
+									<img id="suerCode" src="kaptcha.jpg" style="float: right ;  width:120px;height: 40px">
 									<br />
 									<br />
 									<input type="submit" value="注册" id="sub_btn" />
