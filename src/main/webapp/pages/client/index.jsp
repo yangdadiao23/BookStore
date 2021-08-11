@@ -6,9 +6,15 @@
 <meta charset="UTF-8">
 <title>书城首页</title>
 <link type="text/css" rel="stylesheet" href="static/css/style.css" >
+	<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 	<%@include file="/pages/common/head.jsp"%>
 	<script type="text/javascript">
 		$(function (){
+			$("button.cart").click(function (){
+                 var id = $(this).attr("bookId");
+				location.href="http://localhost:8080/BookStore/cartServlet?action=addItem&id="+id;
+			})
+
 
 		})
 	</script>
@@ -45,12 +51,13 @@
 				</form>
 			</div>
 			<div style="text-align: center">
-				<span>您的购物车中有3件商品</span>
-				<div>
-					您刚刚将<span style="color: red">时间简史</span>加入到了购物车中
-				</div>
+				<span>您的购物车中有${sessionScope.cart.totalCount}件商品</span>
+				<c:if test="${not empty sessionScope.cart.items}">
+					<div>
+						您刚刚将<span style="color: red">${sessionScope.lastName}</span>加入到了购物车中
+					</div>
+				</c:if>
 			</div>
-
 			<c:forEach items="${requestScope.page.items}" var="book">
 			<div class="b_list">
 				<div class="img_div">
@@ -78,7 +85,7 @@
 						<span class="sp2">${book.stock}</span>
 					</div>
 					<div class="book_add">
-						<button>加入购物车</button>
+						<button class="cart" bookId="${book.id}">加入购物车</button>
 					</div>
 				</div>
 			</div>
