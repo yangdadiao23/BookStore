@@ -3,11 +3,14 @@ package com.example.BookStore;
 import Variety.pojo.User;
 import Variety.service.impl.UserServiceImpl;
 import Variety.utils.beanUtils;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 
@@ -81,4 +84,16 @@ public class UserServlet extends BaseServlet {
         request.getSession().invalidate();
         response.sendRedirect(request.getContextPath());
     }
+
+    protected void AjaxExistUsername(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String username = request.getParameter("username");
+        boolean res = us.checkByusername(username);
+        Map<String,Object> map=new HashMap<>();
+        map.put("res",res);
+        Gson gson=new Gson();
+        String s = gson.toJson(map);
+        response.getWriter().write(s);
+
+    }
+
 }

@@ -10,12 +10,17 @@
 	<%@include file="/pages/common/head.jsp"%>
 	<script type="text/javascript">
 		$(function (){
-			$("button.cart").click(function (){
+/*			$("button.cart").click(function (){
                  var id = $(this).attr("bookId");
+				$.getJSON("http://localhost:8080/BookStore/cartServlet","action=AjaxAddItem&id="+id,function (date){
+					$("#totalCount").html("您的购物车中有"+date.totalCount+"件商品");
+					$("#lastName").html(date.lastName);
+				})
+			})*/
+			$("button.cart").click(function (){
+				var id = $(this).attr("bookId");
 				location.href="http://localhost:8080/BookStore/cartServlet?action=addItem&id="+id;
 			})
-
-
 		})
 	</script>
 </head>
@@ -51,10 +56,10 @@
 				</form>
 			</div>
 			<div style="text-align: center">
-				<span>您的购物车中有${sessionScope.cart.totalCount}件商品</span>
+				<span id="totalCount">您的购物车中有${sessionScope.cart.totalCount}件商品</span>
 				<c:if test="${not empty sessionScope.cart.items}">
-					<div>
-						您刚刚将<span style="color: red">${sessionScope.lastName}</span>加入到了购物车中
+					<div >
+						您刚刚将<span id="lastName" style="color: red">${sessionScope.lastName}</span>加入到了购物车中
 					</div>
 				</c:if>
 			</div>

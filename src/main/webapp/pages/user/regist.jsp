@@ -16,6 +16,18 @@
 	<script type="text/javascript">
 		$(function (){
 
+			$("#username").blur(function () {
+				var username=this.value;
+				$.getJSON("http://localhost:8080/BookStore/userServlet","action=AjaxExistUsername&username="+username,function (date) {
+					if(date.res){
+						$("span.errorMsg").text("用户名已存在!")
+					}else{
+						$("span.errorMsg").text("用户名可用！")
+					}
+				})
+
+			})
+
 			$("#sub_btn").click(function (){
 
 				var name = $("#username").val();

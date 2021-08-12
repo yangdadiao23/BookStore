@@ -2,13 +2,11 @@ package com.example.BookStore;
 
 import Variety.pojo.Cart;
 import Variety.pojo.User;
-import Variety.service.impl.BookServiceImpl;
 import Variety.service.impl.OrderServiceImpl;
-import Variety.utils.jdbcUtils;
-import com.alibaba.druid.util.JdbcUtils;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class OrderServlet extends BaseServlet {
@@ -24,10 +22,11 @@ public class OrderServlet extends BaseServlet {
         User user = (User) request.getSession().getAttribute("user");
         if(user==null){
             request.getRequestDispatcher("/pages/user/login.jsp").forward(request,response);
+        }else{
+            int user_id=user.getId();
+            String order_id= orderService.createOrder(cart, user_id);
+            request.getSession().setAttribute("order_id",order_id);
+            response.sendRedirect(request.getContextPath()+"/pages/cart/checkout.jsp");
         }
-        int user_id=user.getId();
-        String order_id= orderService.createOrder(cart, user_id);
-        request.getSession().setAttribute("order_id",order_id);
-        response.sendRedirect(request.getContextPath()+"/pages/cart/checkout.jsp");
     }
 }

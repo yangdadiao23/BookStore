@@ -16,7 +16,6 @@ public class OrderServiceImpl implements OrderService {
     public String createOrder(Cart cart, int user_id) {
         String order_id=System.currentTimeMillis()+""+user_id;
         orderDao.saveOrder(new Order(order_id,new Date(),cart.getTotalPrice(),0,user_id));
-        int i=1/0;
         for(Map.Entry<Integer, CartItem> entry:cart.getItems().entrySet()) {
             CartItem item = entry.getValue();
             orderItemDao.saveOrderItem(new OrderItem(item.getName(), item.getCount(), item.getPrice(), item.getTotalPrice(), order_id));
