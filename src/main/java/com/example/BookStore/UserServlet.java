@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.concurrent.locks.ReentrantLock;
 
 import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 
@@ -46,6 +45,7 @@ public class UserServlet extends BaseServlet {
 //                调用Sservice保存到数据库
                 us.regist(new User( username, password, email));
                 request.getSession().setAttribute("username",username);
+                request.getSession().setAttribute("user",user);
 //        跳到注册成功页面 regist_success.jsp
                 request.getRequestDispatcher("/pages/user/regist_success.jsp").forward(request, response);
             }
@@ -67,6 +67,7 @@ public class UserServlet extends BaseServlet {
         User user=us.login(new User(username,password));
         if(user!=null){
             request.getSession().setAttribute("username",username);
+            request.getSession().setAttribute("user",user);
             request.getRequestDispatcher("/pages/user/login_success.jsp").forward(request,response);
         }else{
             request.setAttribute("msg","用户名或密码错误！");
