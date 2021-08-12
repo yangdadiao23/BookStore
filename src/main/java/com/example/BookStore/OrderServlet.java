@@ -4,6 +4,8 @@ import Variety.pojo.Cart;
 import Variety.pojo.User;
 import Variety.service.impl.BookServiceImpl;
 import Variety.service.impl.OrderServiceImpl;
+import Variety.utils.jdbcUtils;
+import com.alibaba.druid.util.JdbcUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -24,7 +26,7 @@ public class OrderServlet extends BaseServlet {
             request.getRequestDispatcher("/pages/user/login.jsp").forward(request,response);
         }
         int user_id=user.getId();
-        String order_id = orderService.createOrder(cart, user_id);
+        String order_id= orderService.createOrder(cart, user_id);
         request.getSession().setAttribute("order_id",order_id);
         response.sendRedirect(request.getContextPath()+"/pages/cart/checkout.jsp");
     }

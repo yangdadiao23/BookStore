@@ -3,6 +3,7 @@ package Variety.utils;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.alibaba.druid.util.JdbcUtils;
+import com.mysql.jdbc.ConnectionFeatureNotAvailableException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +20,7 @@ import java.util.Properties;
 
 public class jdbcUtils {
     private  static DruidDataSource dataSource;
+    private  static  ThreadLocal<Connection>conns=new ThreadLocal<>();
     static {
         Properties properties=new Properties();
         InputStream resourceAsStream = JdbcUtils.class.getClassLoader().getResourceAsStream("jdbc.properties");
@@ -40,21 +42,23 @@ public class jdbcUtils {
     获取数据库连接池中的连接
      */
     public  static Connection getConnection(){
-        Connection conn=null;
-
-        try {
-            conn=dataSource.getConnection();
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
+        Connection conn=conns.get();
+        if(conn==null){
+            try {
+                conn=dataSource.getConnection();
+                conns.set(conn);
+                conn.setAutoCommit(false);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
-
         return conn;
     }
 
     /*
     关闭连接，放回数据库连接池
      */
-    public static void close(Connection conn){
+   /* public static void close(Connection conn){
         if(conn!=null){
             try {
                 conn.close();
@@ -62,5 +66,42 @@ public class jdbcUtils {
                 throwable.printStackTrace();
             }
         }
+    }*/
+
+    public static void commitAndClose(){
+        Connection connection=conns.get();
+        if(connection!=null){
+            try {
+                connection. commit();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        conns.remove();
+
+    }
+
+    public static void RollbackAndClose(){
+        Connection connection=conns.get();
+        if(connection!=null){
+            try {
+                connection.rollback();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } finally {
+                try {
+                    connection.close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        conns.remove();
     }
 }

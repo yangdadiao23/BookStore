@@ -12,57 +12,50 @@ import java.sql.SQLException;
 import java.util.List;
 
 public abstract class BaseDao {
-    private static QueryRunner qr=new QueryRunner();
+    private static QueryRunner qr = new QueryRunner();
 
-    public  static  int update(String sql,Object...args){
-        Connection con=null;
+    public static int update(String sql, Object... args) {
+        Connection con = null;
         try {
-           con = jdbcUtils.getConnection();
-            return qr.update(con,sql,args);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } finally {
-            jdbcUtils.close(con);
-        }
-        return -1;
-    }
-
-
-    public static <T> T query(Class<T> clazz,String sql,Object...args){
-        Connection con=jdbcUtils.getConnection();
-        try {
-          return (T) qr.query(con,sql, new BeanHandler<T>(clazz),args);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }finally {
-            jdbcUtils.close(con);
-        }
-        return null;
-    }
-
-    public static <T>List<T>  queryAll(Class<T> clazz, String sql, Object...args){
-        Connection con=jdbcUtils.getConnection();
-        try {
-            return  qr.query(con,sql,  new BeanListHandler<T>(clazz),args);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }finally {
-            jdbcUtils.close(con);
-        }
-        return null;
-    }
-
-    public  static Object querySingle(String sql,Object...args){
-        Connection con=jdbcUtils.getConnection();
-        try {
-           return  qr.query(con,sql,new ScalarHandler<>(),args);
+            con = jdbcUtils.getConnection();
+            return qr.update(con, sql, args);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            jdbcUtils.close(con);
+            throw new RuntimeException(e);
         }
-        return null;
+
     }
 
 
+    public static <T> T query(Class<T> clazz, String sql, Object... args) {
+        Connection con = jdbcUtils.getConnection();
+        try {
+            return (T) qr.query(con, sql, new BeanHandler<T>(clazz), args);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static <T> List<T> queryAll(Class<T> clazz, String sql, Object... args) {
+        Connection con = jdbcUtils.getConnection();
+        try {
+            return qr.query(con, sql, new BeanListHandler<T>(clazz), args);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Object querySingle(String sql, Object... args) {
+        Connection con = jdbcUtils.getConnection();
+        try {
+            return qr.query(con, sql, new ScalarHandler<>(), args);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+
+    }
 }
