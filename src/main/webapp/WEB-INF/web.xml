@@ -11,6 +11,17 @@
         <filter-name>TransactionFilter</filter-name>
         <filter-class>com.example.Filter.TransactionFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>com.example.Filter.UserFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <url-pattern>/pages/client/*</url-pattern>
+        <url-pattern>/pages/cart/*</url-pattern>
+        <url-pattern>/pages/order/*</url-pattern>
+        <url-pattern>/pages/user/*</url-pattern>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>TransactionFilter</filter-name>
         <servlet-name>BookServlet</servlet-name>
@@ -18,6 +29,7 @@
         <servlet-name>ClientBookServlet</servlet-name>
         <servlet-name>UserServlet</servlet-name>
         <servlet-name>OrderServlet</servlet-name>
+        <servlet-name>ManagerServlet</servlet-name>
     </filter-mapping>
 
     <filter-mapping>
@@ -87,6 +99,14 @@
         <servlet-name>OrderServlet</servlet-name>
         <servlet-class>com.example.BookStore.OrderServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ManagerServlet</servlet-name>
+        <servlet-class>com.example.BookStore.ManagerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManagerServlet</servlet-name>
+        <url-pattern>/managerServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OrderServlet</servlet-name>
         <url-pattern>/orderServlet</url-pattern>

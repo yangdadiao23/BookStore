@@ -40,6 +40,30 @@ public class OrderItem {
         this.order_id = order_id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public void setTotal_price(float total_price) {
+        this.total_price = total_price;
+    }
+
+    public void setOrder_id(String order_id) {
+        this.order_id = order_id;
+    }
+
     public int getId() {
         return id;
     }

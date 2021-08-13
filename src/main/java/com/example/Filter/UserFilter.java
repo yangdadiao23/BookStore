@@ -7,7 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-public class ManagerFilter implements Filter {
+public class UserFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }
 
@@ -17,10 +17,10 @@ public class ManagerFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest httpServletRequest=(HttpServletRequest) request;
-      Manager manager=(Manager) ((HttpServletRequest) request).getSession().getAttribute("manager");
-       if(manager==null){
-           request.getRequestDispatcher("/pages/manager/manager_login.jsp").forward(request,response);
-       }
+        User user =(User) ((HttpServletRequest) request).getSession().getAttribute("user");
+        if(user==null){
+            request.getRequestDispatcher("/pages/user/login.jsp").forward(request,response);
+        }
         chain.doFilter(request, response);
     }
 }

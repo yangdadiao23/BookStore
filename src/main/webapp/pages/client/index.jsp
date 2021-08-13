@@ -36,9 +36,10 @@
 					<a href="pages/cart/cart.jsp">购物车</a>
 					<a href="pages/manager/manager.jsp">后台管理</a>
 				</c:if>
+
 				<c:if test="${not empty sessionScope.username}">
 					<span>欢迎<span class="um_span">${sessionScope.username}</span>光临尚硅谷书城</span>
-					<a href="pages/order/order.jsp">我的订单</a>
+					<a href="orderServlet?action=showOrder">我的订单</a>
 					<a href="userServlet?action=logout">注销</a>&nbsp;&nbsp;
 					<a href="pages/cart/cart.jsp">购物车</a>
 					<a href="pages/manager/manager.jsp">后台管理</a>

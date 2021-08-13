@@ -11,7 +11,7 @@
     <title>error</title>
 </head>
 <body>
-  <h1>抱歉，您访问的页面为找到或被删除</h1>
+  <h1>抱歉，您访问的页面未找到或被删除</h1>
   <a href="http://localhost:8080/BookStore/index.jsp">首页</a>
 </body>
 </html>

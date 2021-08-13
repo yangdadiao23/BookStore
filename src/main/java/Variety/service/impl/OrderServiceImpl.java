@@ -6,6 +6,7 @@ import Variety.pojo.*;
 import Variety.service.OrderService;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 public class OrderServiceImpl implements OrderService {
@@ -27,4 +28,16 @@ public class OrderServiceImpl implements OrderService {
         cart.clearItem();
         return order_id;
     }
+
+    @Override
+    public List<Order> showOrder(int user_id) {
+       return orderDao.showOrder(user_id);
+    }
+
+    @Override
+    public List<OrderItem> searchOrderItem(String order_Id) {
+        return orderItemDao.searchOrderItem(order_Id);
+    }
+
+
 }

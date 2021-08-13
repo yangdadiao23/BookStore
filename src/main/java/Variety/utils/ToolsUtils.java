@@ -23,4 +23,16 @@ public class ToolsUtils {
         }
         return defaultValue;
     }
+
+    public  static  String intToStatus(int status){
+        if(status==0){
+            return "未发货";
+        }else if(status==1){
+            return "已发货";
+        }else{
+            return "以签收";
+        }
+
+
+    }
 }

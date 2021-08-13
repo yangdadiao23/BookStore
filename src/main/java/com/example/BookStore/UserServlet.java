@@ -1,6 +1,8 @@
 package com.example.BookStore;
 
+import Variety.pojo.Manager;
 import Variety.pojo.User;
+import Variety.service.impl.ManagerServiceImpl;
 import Variety.service.impl.UserServiceImpl;
 import Variety.utils.beanUtils;
 import com.google.gson.Gson;
@@ -68,15 +70,16 @@ public class UserServlet extends BaseServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         User user=us.login(new User(username,password));
+
         if(user!=null){
             request.getSession().setAttribute("username",username);
             request.getSession().setAttribute("user",user);
             request.getRequestDispatcher("/pages/user/login_success.jsp").forward(request,response);
-        }else{
-            request.setAttribute("msg","用户名或密码错误！");
+        }else {
+            request.setAttribute("msg", "用户名或密码错误！");
             System.out.println(request.getParameter("msg"));
-            request.setAttribute("username",username);
-            request.getRequestDispatcher("/pages/user/login.jsp").forward(request,response);
+            request.setAttribute("username", username);
+            request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
         }
     }
 

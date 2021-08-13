@@ -88,7 +88,7 @@ public class BookServlet extends BaseServlet {
             pageNo = ToolsUtils.StringToint(request.getParameter("pageNo"));
         }
        Page page=bookService.queryBookByPage(pageNo,pageSize);
-        page.setUrl("manager/BookServlet?action=page");
+        page.setUrl("manager/bookServlet?action=page");
        request.setAttribute("page",page);
        request.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(request,response);
     }

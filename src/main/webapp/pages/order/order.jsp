@@ -1,4 +1,8 @@
+<%@ page import="Variety.utils.ToolsUtils" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Variety.pojo.Order" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,26 +33,35 @@
 				<td>状态</td>
 				<td>详情</td>
 			</tr>
-			<tr>
-				<td>2015.04.23</td>
-				<td>90.00</td>
-				<td>未发货</td>
-				<td><a href="#">查看详情</a></td>
-			</tr>	
-			
-			<tr>
-				<td>2015.04.20</td>
-				<td>20.00</td>
-				<td>已发货</td>
-				<td><a href="#">查看详情</a></td>
-			</tr>	
-			
-			<tr>
-				<td>2014.01.23</td>
-				<td>190.00</td>
-				<td>已完成</td>
-				<td><a href="#">查看详情</a></td>
-			</tr>		
+
+			<c:if test="${empty sessionScope.orders}">
+				<tr>
+					<td colspan="4">订单为空，快去购物吧！</td>
+				</tr>
+			</c:if>
+			<c:if test="${not empty sessionScope.orders}">
+				<% List<Order>orders=(List<Order>) request.getSession().getAttribute("orders");
+					int[] status=new int[orders.size()];
+					int i=0;
+					for(Order o:orders){
+                          status[i++]=o.getStatus();
+					}
+					i=0;
+				%>
+				<c:forEach items="${sessionScope.orders}" var="order">
+					<tr>
+						<td>${order.create_time}</td>
+						<td>${order.price}</td>
+						<td><%=ToolsUtils.intToStatus(status[i++])%></td>
+						<td><a href="orderServlet?action=searchOrder&order_id=${order.order_id}">查看详情</a></td>
+					</tr>
+				</c:forEach>
+
+
+			</c:if>
+
+
+
 		</table>
 		
 	
